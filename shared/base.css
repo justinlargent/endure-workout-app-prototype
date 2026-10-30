@@ -1,0 +1,40 @@
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--g:#D3B182;--c:#F5F2EC;--m:rgba(245,242,236,.55);--line:#1c1c1c;--safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px)}
+html,body{background:#000;color:var(--c);font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+body{min-height:100dvh;max-width:480px;margin:0 auto;position:relative}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'DM Mono',ui-monospace,monospace}.disp{font-family:Unbounded,Inter,sans-serif}
+.gold{color:var(--g)}.muted{color:var(--m)}
+.screen{padding:calc(var(--safe-t) + 14px) 0 calc(96px + var(--safe-b));min-height:100dvh}
+.pad{padding:0 22px}
+.hello{font-size:13px;color:var(--m)}
+.h1{font-family:Unbounded,Inter,sans-serif;font-size:26px;font-weight:600;line-height:1.15;margin-top:6px}
+.nav{position:fixed;left:50%;transform:translateX(-50%);width:100%;max-width:480px;bottom:0;padding:10px 0 calc(10px + var(--safe-b));border-top:1px solid #1d1d1d;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);display:flex;justify-content:space-around;z-index:20}
+.nav button{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#777;text-align:center;min-width:64px}
+.nav button b{display:block;width:22px;height:22px;margin:0 auto 6px;border:1.5px solid #777;border-radius:6px}
+.nav button.on{color:var(--g)}.nav button.on b{border-color:var(--g);background:rgba(211,177,130,.15)}
+.seg{display:flex;background:#141414;border-radius:14px;padding:4px;margin:14px 22px 6px}
+.seg button{flex:1;padding:10px 0;border-radius:11px;font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--m)}
+.seg button.on{background:var(--c);color:#000}
+.seg small{display:block;font-weight:400;font-size:10px;letter-spacing:.04em;margin-top:2px;opacity:.7}
+.ex{margin:0 22px;border-bottom:1px solid var(--line);padding:11px 0;display:flex;gap:12px;align-items:center;width:calc(100% - 44px);text-align:left}
+.ex .b{font-family:'DM Mono',monospace;font-size:11px;color:var(--g);width:22px;flex:none}
+.ex .n{font-size:14.5px;font-weight:600}.ex .d{font-size:12px;color:var(--m);margin-top:3px}
+.ex .go{margin-left:auto;min-width:30px;height:30px;padding:0 8px;border-radius:15px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--m);flex:none;font-family:'DM Mono',monospace}
+.ex .go.done{background:var(--g);border-color:var(--g);color:#000}
+.ex .go.part{border-color:var(--g);color:var(--g)}
+.btn{display:flex;align-items:center;justify-content:center;height:54px;border-radius:18px;font-weight:700;letter-spacing:.14em;font-size:13px;width:100%}
+.btn.cream{background:var(--c);color:#000}.btn.gold{background:var(--g);color:#000}.btn.line{border:1px solid var(--g);color:var(--g)}
+.chip{font-size:12px;padding:8px 12px;border-radius:20px;border:1px solid #2c2c2c;color:var(--m);white-space:nowrap}
+.chip.on{background:var(--c);color:#000;border-color:var(--c);font-weight:600}
+.chips{display:flex;gap:8px;padding:16px 22px 0;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.pr{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.pr .n{font-size:14px;font-weight:600}.pr .s{font-size:11.5px;color:var(--m);margin-top:3px}
+.pr .v{font-family:Unbounded,sans-serif;font-size:16px;font-weight:600;white-space:nowrap}
+.tag{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;color:#000;background:var(--g);padding:3px 6px;border-radius:4px;margin-right:8px}
+.pill{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.12em;padding:6px 10px;border:1px solid var(--g);border-radius:20px;color:var(--g)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:0 22px}
+.back{font-size:14px;color:var(--m);padding:6px 0}
+.toast{position:fixed;left:50%;top:calc(var(--safe-t) + 12px);transform:translateX(-50%);background:var(--g);color:#000;padding:10px 16px;border-radius:14px;font-weight:600;font-size:13px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.sample{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;color:#666;text-align:center;padding:18px 22px 0}
