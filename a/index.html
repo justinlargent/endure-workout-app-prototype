@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Endure A"><meta name="theme-color" content="#000000">
+<link rel="apple-touch-icon" href="../icons/icon-180.png"><link rel="manifest" href="manifest.webmanifest">
+<title>Endure · Concept A · Today Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+.hero{margin:14px 22px 0;border:1px solid var(--g);border-radius:22px;padding:18px;background:linear-gradient(160deg,#141210,#000 70%)}
+.hero .k{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--g)}
+.hero .big{font-family:Unbounded,sans-serif;font-size:40px;font-weight:700;margin:8px 0 2px}
+.hero .meta{font-size:13px;color:var(--m)}
+.hero .bar{display:flex;gap:6px;margin-top:14px}.hero .bar i{flex:1;height:4px;border-radius:2px;background:#2a2a2a}.hero .bar i.on{background:var(--g)}
+.hero .bl{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:var(--m);margin-top:6px;letter-spacing:.08em}
+.prog{margin:12px 22px 0;font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:var(--m);display:flex;justify-content:space-between}
+.cta{padding:16px 22px 0}
+.lname{padding:12px 22px 0;font-family:Unbounded,sans-serif;font-size:28px;font-weight:600;line-height:1.15}
+.lsub{padding:6px 22px 0;font-size:13px;color:var(--m)}
+.last{margin:16px 22px 0;background:#121212;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.last .l{font-size:11px;letter-spacing:.14em;color:var(--m);font-family:'DM Mono',monospace}
+.last .v{font-size:17px;font-weight:600;margin-top:4px}.last .r{font-size:12px;color:var(--g);text-align:right}
+.dial{margin:18px 22px 0;display:flex;gap:12px}
+.box{flex:1;border:1px solid #2a2a2a;border-radius:20px;padding:12px 0 10px;text-align:center}
+.box.on{border-color:var(--g)}.box .lab{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--m)}
+.box .num{font-family:Unbounded,sans-serif;font-size:44px;font-weight:600;margin:4px 0 2px}.box.on .num{color:var(--g)}
+.box .st{display:flex;justify-content:center;gap:10px}.box .st button{width:52px;height:40px;border-radius:12px;background:#151515;font-size:22px;color:var(--c)}
+.sets{margin:16px 22px 0}
+.set{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;width:100%;text-align:left}
+.set .i{width:50px;font-family:'DM Mono',monospace;color:var(--m);font-size:12px}.set .w{flex:1;font-weight:600}
+.set .ck{width:28px;height:28px;border-radius:50%;border:1px solid #444;display:flex;align-items:center;justify-content:center;font-size:13px}
+.set .ck.on{background:var(--g);border-color:var(--g);color:#000}
+.set.cur .w,.set.cur .i{color:var(--g)}
+.addset{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--m);padding:12px 0}
+.logbar{position:fixed;left:50%;transform:translateX(-50%);width:100%;max-width:480px;bottom:0;padding:12px 22px calc(16px + var(--safe-b));background:linear-gradient(180deg,rgba(0,0,0,0),#000 30%);z-index:25}
+.timer{position:fixed;left:50%;transform:translateX(-50%);width:calc(100% - 28px);max-width:452px;bottom:calc(16px + var(--safe-b));border-radius:24px;background:var(--c);color:#000;padding:14px 16px;display:none;align-items:center;gap:14px;z-index:40;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+.timer.show{display:flex}
+.timer svg{width:62px;height:62px;flex:none}
+.timer .tt{font-family:Unbounded,sans-serif;font-size:24px;font-weight:700}.timer .tl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;opacity:.7}
+.timer .act{margin-left:auto;display:flex;flex-direction:column;gap:6px}
+.timer .act button{background:#000;color:var(--c);border-radius:10px;padding:7px 10px;font-size:11px;font-weight:600;letter-spacing:.08em}
+.stat{padding:18px 22px 0;display:flex;align-items:flex-end;gap:12px}
+.stat .n{font-family:Unbounded,sans-serif;font-size:50px;font-weight:600;line-height:1}
+.stat .u{font-size:14px;color:var(--m);padding-bottom:6px}.stat .d{margin-left:auto;font-size:13px;color:var(--g);padding-bottom:6px;text-align:right}
+.chart{margin:14px 22px 0}
+.sec{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--g);padding:22px 22px 4px}
+.prs{margin:0 22px}
+</style></head><body>
+<div id="app"></div><div class="timer" id="timer"></div><div class="toast" id="toast"></div>
+<script src="../shared/data.js"></script>
+<script>
+const S = EFC.store('efc-proto-a');
+let st = Object.assign({side:EFC.firstSide, view:'today', ex:null, cur:0, lift:'r-b1', logs:{}}, S.get());
+const save = () => S.set(st);
+const $ = s => document.querySelector(s);
+const toast = t => { const e=$('#toast'); e.textContent=t; e.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>e.classList.remove('show'),1600); };
+const nav = on => `<nav class="nav">${[['today','Today'],['log','Log'],['progress','Progress'],['profile','Profile']].map(([k,l])=>`<button class="${on===k?'on':''}" onclick="go('${k}')"><b></b>${l}</button>`).join('')}</nav>`;
+function nextEx(){ for (const sd of [st.side, st.side==='RACKS'?'FLOOR':'RACKS']) for (const e of EFC.sides[sd].ex) { if (EFC.doneCount(st.logs,e) < e.sets) return {...e,side:sd}; } return null; }
+function go(v){ if(v==='log'){ const n=nextEx()||EFC.byId('r-b1'); return openEx(n.id);} st.view=v; save(); render(); scrollTo(0,0); }
+function openEx(id){ const ex=EFC.byId(id); st.ex=id; st.side=ex.side; st.view='log'; const sets=EFC.setsFor(st.logs,ex); st.logs[id]=sets; const i=sets.findIndex(s=>!s.done); st.cur=i<0?sets.length-1:i; save(); render(); scrollTo(0,0); }
+function setSide(s){ st.side=s; save(); render(); }
+function statusOf(ex){ const d=EFC.doneCount(st.logs,ex); return d===0?['›','']:d>=ex.sets?['✓','done']:[d+'/'+ex.sets,'part']; }
+function today(){
+  const side = EFC.sides[st.side], other = st.side==='RACKS'?'FLOOR':'RACKS', D=EFC.day;
+  const total = EFC.all().reduce((a,e)=>a+e.sets,0), done = EFC.all().reduce((a,e)=>a+Math.min(EFC.doneCount(st.logs,e),e.sets),0);
+  const n = nextEx();
+  return `<div class="screen"><div class="pad"><div class="hello">Good morning, ${EFC.member.name}</div><div class="h1">Today at Endure</div></div>
+  <div class="hero"><div class="k">${D.date.toUpperCase()} · ${D.program.toUpperCase()} · ${D.time}</div><div class="big">${D.title}</div>
+  <div class="meta">Week ${D.week} of 4 · ${D.phase} · ${D.reps} · ${D.coach}</div>
+  <div class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><div class="bl"><span>MOBILITY</span><span>VOL 1</span><span>VOL 1</span><span>POWER</span></div></div>
+  <div class="seg">${['RACKS','FLOOR'].map(s=>`<button class="${st.side===s?'on':''}" onclick="setSide('${s}')">${s}<small>${s===EFC.firstSide?'You start here':'After the swap'} · rest ${EFC.sides[s].rest}</small></button>`).join('')}</div>
+  ${side.ex.map(e=>{const [t,c]=statusOf(e); return `<button class="ex" onclick="openEx('${e.id}')"><div class="b">${e.blk}</div><div><div class="n">${e.name}</div><div class="d">${e.rx}</div></div><div class="go ${c}">${t}</div></button>`}).join('')}
+  <div class="prog"><span>${done} OF ${total} SETS LOGGED</span><span>${Math.round(done/total*100)}%</span></div>
+  <div class="cta">${n?`<button class="btn cream" onclick="openEx('${n.id}')">CONTINUE · ${n.blk} ${n.name.toUpperCase().slice(0,22)}</button>`:`<button class="btn gold" onclick="go('progress')">CLASS COMPLETE · SEE PROGRESS</button>`}</div>
+  <div class="sample">PROTOTYPE · SAMPLE DATA · NOTHING IS SAVED TO A SERVER</div></div>${nav('today')}`;
+}
+function logView(){
+  const ex = EFC.byId(st.ex), sets = st.logs[ex.id], s = sets[st.cur], bw = ex.unit!=='lb', rl = ex.repLabel||'REPS';
+  const lastTxt = ex.last ? `${ex.last.w} lb x ${ex.last.r.join(', ')}` : (ex.unit==='band'?'Band':'Bodyweight');
+  const pb = EFC.prevBest(ex);
+  return `<div class="screen" style="padding-bottom:calc(110px + var(--safe-b))"><div class="top"><button class="back" onclick="go('today')">‹ ${ex.side==='RACKS'?'Racks':'Floor'}</button><span class="pill">${ex.blk} · SET ${st.cur+1} OF ${sets.length}</span></div>
+  <div class="lname">${ex.name}</div><div class="lsub">${ex.rx} · Rest ${EFC.sides[ex.side].rest}${ex.range?' · '+ex.range:''}</div>
+  <div class="last"><div><div class="l">LAST TIME · OCT 22</div><div class="v">${lastTxt}</div></div><div class="r">${ex.last?`Best ${pb} lb${ex.perHand?'<br>per hand':''}`:ex.cue}</div></div>
+  <div class="dial">${bw?'':`<div class="box ${'on'}"><div class="lab">WEIGHT · LB</div><div class="num" id="wv">${s.w}</div><div class="st"><button onclick="adj('w',-5)">−</button><button onclick="adj('w',5)">+</button></div></div>`}
+  <div class="box ${bw?'on':''}"><div class="lab">${rl}</div><div class="num" id="rv">${s.r}</div><div class="st"><button onclick="adj('r',${rl==='SEC'?-5:-1})">−</button><button onclick="adj('r',${rl==='SEC'?5:1})">+</button></div></div></div>
+  <div class="sets">${sets.map((x,i)=>`<button class="set ${i===st.cur?'cur':''}" onclick="pick(${i})"><span class="i">SET ${i+1}</span><span class="w">${bw?'':x.w+' x '}${x.r}${rl==='SEC'?'s':''}${!x.done&&i===st.cur?' · '+(x.w===(ex.last||{}).w?'prefilled':'edited'):''}</span><span class="ck ${x.done?'on':''}" onclick="event.stopPropagation();toggle(${i})">${x.done?'✓':''}</span></button>`).join('')}
+  <button class="addset" onclick="addSet()">+ ADD SET</button></div>
+  <div class="sample">TIP · TAP A SET TO EDIT IT, TAP ITS CIRCLE TO MARK DONE</div></div>
+  <div class="logbar"><button class="btn gold" id="logbtn" onclick="logSet()">${sets.every(x=>x.done)?'ALL SETS DONE · NEXT EXERCISE':'LOG SET '+(st.cur+1)+' · ONE TAP'}</button></div>`;
+}
+function adj(k,d){ const s=st.logs[st.ex][st.cur]; s[k]=Math.max(0,+(s[k]+d).toFixed(1)); if(s.done) s.done=true; save(); render(); }
+function pick(i){ st.cur=i; save(); render(); }
+function toggle(i){ const s=st.logs[st.ex][i]; s.done=!s.done; save(); render(); if(s.done) startRest(); }
+function addSet(){ const sets=st.logs[st.ex]; const l=sets[sets.length-1]; sets.push({w:l.w,r:l.r,done:false}); st.cur=sets.length-1; save(); render(); }
+function logSet(){
+  const ex=EFC.byId(st.ex), sets=st.logs[ex.id];
+  if (sets.every(x=>x.done)) { const n=nextEx(); return n?openEx(n.id):go('progress'); }
+  sets[st.cur].done=true; const s=sets[st.cur];
+  // carry weight forward to later unlogged sets
+  for (let j=st.cur+1;j<sets.length;j++) if(!sets[j].done) sets[j].w=s.w;
+  const b=EFC.bestToday(st.logs,ex); if(ex.hist && b && s.w>EFC.prevBest(ex)) toast('New PR · '+ex.name+' '+s.w+' lb');
+  const i=sets.findIndex(x=>!x.done); if(i>=0) st.cur=i; save(); render(); startRest();
+}
+let tInt=null, tLeft=0, tTotal=0;
+function startRest(){ const ex=EFC.byId(st.ex); tTotal=tLeft=EFC.sides[ex.side].restSec; clearInterval(tInt); tInt=setInterval(()=>{tLeft--; if(tLeft<=0){stopRest(); toast('Rest done · next set'); if(navigator.vibrate) navigator.vibrate(200);} else drawT();},1000); drawT(); }
+function drawT(){ const e=$('#timer'); const C=169.6, off=C*(1-tLeft/tTotal); const m=Math.floor(tLeft/60), s=String(tLeft%60).padStart(2,'0'); const ex=EFC.byId(st.ex), sets=st.logs[ex.id], n=sets.find(x=>!x.done);
+  e.innerHTML=`<svg viewBox="0 0 62 62"><circle cx="31" cy="31" r="27" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="5"/><circle cx="31" cy="31" r="27" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${off}" transform="rotate(-90 31 31)"/></svg><div><div class="tl">REST · ${EFC.sides[ex.side].rest}</div><div class="tt">${m}:${s}</div><div style="font-size:11.5px;margin-top:2px">${n?'Next: '+(ex.unit==='lb'?n.w+' x ':'')+n.r:'Exercise complete'}</div></div><div class="act"><button onclick="tLeft+=15;tTotal+=15;drawT()">+15S</button><button onclick="stopRest()">SKIP</button></div>`; e.classList.add('show'); }
+function stopRest(){ clearInterval(tInt); $('#timer').classList.remove('show'); }
+function progress(){
+  const lifts = EFC.all().filter(e=>e.hist && e.repLabel!=='SEC');
+  const ex = EFC.byId(st.lift) , ser = EFC.series(st.logs, ex), b = EFC.bestToday(st.logs, ex);
+  const cur = b ? b.w : Math.max(...ex.hist), first = ex.hist[0];
+  const prs = lifts.map(e=>{const bb=EFC.bestToday(st.logs,e); return {e,bb,pr: bb && bb.w>EFC.prevBest(e)}}).filter(x=>x.bb);
+  const vol = EFC.volToday(st.logs);
+  return `<div class="screen"><div class="pad"><div class="hello">Progress</div><div class="h1">Your lifts</div></div>
+  <div class="chips">${lifts.map(e=>`<button class="chip ${e.id===st.lift?'on':''}" onclick="st.lift='${e.id}';save();render()">${e.name.replace('Narrow Stance ','')}</button>`).join('')}</div>
+  <div class="stat"><div class="n">${cur}</div><div class="u">lb${ex.perHand?' per hand':''}<br>${b?'today, best set':'best so far'}</div><div class="d">${cur-first>=0?'+':''}${cur-first} lb<br>since May</div></div>
+  <div class="chart">${EFC.chart(ser.v, ser.l)}</div>
+  <div class="sec">TODAY · OCT 29 · ${EFC.fmt(vol)} LB MOVED</div>
+  <div class="prs">${prs.length? prs.map(({e,bb,pr})=>`<div class="pr"><div><div class="n">${pr?'<span class="tag">NEW PR</span>':''}${e.name}</div><div class="s">${e.side==='RACKS'?'Racks':'Floor'} · ${e.blk} · ${EFC.doneCount(st.logs,e)} sets</div></div><div class="v">${bb.w} x ${bb.r}</div></div>`).join('') : `<div class="pr"><div><div class="n">Nothing logged yet</div><div class="s">Log a set in Today and it shows up here</div></div></div>`}</div>
+  <div class="sec">ALL TIME BEST</div><div class="prs">${lifts.map(e=>{const bb=EFC.bestToday(st.logs,e); const best=Math.max(EFC.prevBest(e), bb?bb.w:0); return `<div class="pr"><div><div class="n">${e.name}</div><div class="s">${e.side==='RACKS'?'Racks':'Floor'} · ${e.range}</div></div><div class="v">${best} lb</div></div>`}).join('')}</div>
+  </div>${nav('progress')}`;
+}
+function profile(){ return `<div class="screen"><div class="pad"><div class="hello">Profile</div><div class="h1">${EFC.member.name}</div><div class="hello" style="margin-top:8px">Member since ${EFC.member.since} · Endure Fit Club, 1494 Laurel Street, San Carlos</div></div>
+  <div style="padding:24px 22px 0"><button class="btn line" onclick="if(confirm('Clear all logged sets in this prototype?')){localStorage.removeItem('efc-proto-a');location.reload()}">RESET PROTOTYPE DATA</button></div>
+  <div style="padding:14px 22px 0"><a href="../" class="btn cream" style="text-decoration:none">BACK TO CONCEPTS</a></div>
+  <div class="sample">CONCEPT A · TODAY CARD · SAMPLE DATA ONLY</div></div>${nav('profile')}`; }
+function render(){ const v=st.view; $('#app').innerHTML = v==='log'&&st.ex ? logView() : v==='progress' ? progress() : v==='profile' ? profile() : today(); }
+render();
+</script></body></html>
