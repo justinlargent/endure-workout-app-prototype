@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Endure C"><meta name="theme-color" content="#000000">
+<link rel="apple-touch-icon" href="../icons/icon-180.png"><link rel="manifest" href="manifest.webmanifest">
+<title>Endure · Concept C · Progress First</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 22px 0}
+.kpi{background:#101010;border-radius:18px;padding:14px;text-align:left}
+.kpi .l{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:var(--m)}
+.kpi .v{font-family:Unbounded,sans-serif;font-size:26px;font-weight:600;margin-top:6px}
+.kpi .s{font-size:11px;color:var(--g);margin-top:3px}
+.kpi.big{grid-column:span 2;background:linear-gradient(140deg,#1b1711,#0b0b0b);border:1px solid #3a3226}
+.bars{display:flex;align-items:flex-end;gap:8px;height:84px;margin-top:12px}
+.bars div{flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:9px;color:var(--m)}
+.bars div i{display:block;background:#2c2c2c;border-radius:5px 5px 2px 2px;margin-bottom:5px;transition:height .4s}
+.bars div.on i{background:var(--g)}
+.strip{margin:12px 22px 0;border:1px solid #2a2a2a;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:12px;width:calc(100% - 44px);text-align:left}
+.strip .d{font-family:Unbounded,sans-serif;font-size:13px;font-weight:600}.strip .s{font-size:11px;color:var(--m);margin-top:3px}
+.strip .b{margin-left:auto;background:var(--c);color:#000;border-radius:12px;padding:9px 12px;font-size:11px;font-weight:700;letter-spacing:.1em;flex:none}
+.whead{padding:0 22px;display:flex;justify-content:space-between;align-items:flex-end}
+.dots{display:flex;gap:4px;margin-top:4px}.dots i{width:7px;height:7px;border-radius:50%;background:#333}.dots i.on{background:var(--g)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;display:none}.scrim.show{display:block}
+.sheet{position:fixed;left:50%;transform:translate(-50%,100%);width:100%;max-width:480px;bottom:0;background:#111;border-radius:30px 30px 0 0;border-top:1px solid #2a2a2a;padding:12px 22px calc(16px + var(--safe-b));z-index:50;transition:transform .28s ease;max-height:94dvh;overflow-y:auto}
+.sheet.show{transform:translate(-50%,0)}
+.grab{width:40px;height:5px;border-radius:3px;background:#444;margin:0 auto 12px}
+.sheet .n{font-family:Unbounded,sans-serif;font-size:21px;font-weight:600;line-height:1.2}.sheet .s{font-size:12px;color:var(--m);margin-top:4px}
+.spark{display:flex;justify-content:space-between;margin-top:12px;background:#0a0a0a;border-radius:14px;padding:10px 12px;align-items:center}
+.spark .t{font-size:11px;color:var(--m);line-height:1.4}
+.inputs{display:flex;gap:10px;margin-top:12px}
+.inputs>button{flex:1;background:#000;border-radius:14px;padding:10px 12px;border:1px solid #2a2a2a;text-align:left}
+.inputs>button.on{border-color:var(--g)}.inputs .l{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:var(--m)}
+.inputs .v{font-family:Unbounded,sans-serif;font-size:26px;font-weight:600;margin-top:2px}.inputs>button.on .v{color:var(--g)}
+.quick{display:flex;gap:8px;margin-top:10px}.quick button{flex:1;padding:9px 0;border-radius:10px;border:1px solid #2a2a2a;font-size:12px;color:var(--m)}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.kp button{background:#1b1b1b;border-radius:12px;height:46px;font-size:20px;font-weight:500}.kp button:active{background:#2a2a2a}
+.setrow{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.setrow button{font-family:'DM Mono',monospace;font-size:11px;padding:7px 9px;border-radius:9px;border:1px solid #2a2a2a;color:var(--m)}
+.setrow button.done{background:#3a3226;color:var(--c);border-color:#3a3226}.setrow button.cur{border-color:var(--g);color:var(--g)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:12px 22px 0}
+.cal span{height:34px;border-radius:7px;background:#141414;font-family:'DM Mono',monospace;font-size:9px;color:#555;display:flex;align-items:flex-end;justify-content:flex-end;padding:3px 5px}
+.cal span.d{background:#3a3226;color:var(--c)}.cal span.p{background:var(--g);color:#000}.cal span.t{outline:1.5px solid var(--c)}
+.cal .h{background:none;color:var(--m);justify-content:center;align-items:center;height:16px;padding:0}
+.legend{display:flex;gap:14px;margin:10px 22px 0;font-family:'DM Mono',monospace;font-size:9.5px;color:var(--m);letter-spacing:.1em}
+.legend b{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:-1px;margin-right:4px}
+.lf{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.lf .n{font-size:13.5px;font-weight:600;width:132px}.lf .sd{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--m);margin-top:3px}
+.lf .v{margin-left:auto;font-family:Unbounded,sans-serif;font-size:14px;font-weight:600;text-align:right;white-space:nowrap}
+.lf .v small{display:block;font-family:Inter,sans-serif;font-size:10.5px;color:var(--g);font-weight:500}
+.lifts{margin:14px 22px 0}
+.detail{margin:4px 22px 0;background:#0d0d0d;border-radius:16px;padding:12px}
+</style></head><body>
+<div id="app"></div><div class="scrim" id="scrim" onclick="closeSheet()"></div><div class="sheet" id="sheet"></div><div class="toast" id="toast"></div>
+<script src="../shared/data.js"></script>
+<script>
+const S = EFC.store('efc-proto-c');
+let st = Object.assign({view:'home', side:EFC.firstSide, logs:{}, lift:'r-b1'}, S.get());
+let sh = null; // sheet state {id, cur, field, buf}
+const save=()=>S.set(st); const $=s=>document.querySelector(s);
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),1600)};
+const nav=on=>`<nav class="nav">${[['home','Home'],['workout','Workout'],['progress','Progress'],['profile','Profile']].map(([k,l])=>`<button class="${on===k?'on':''}" onclick="go('${k}')"><b></b>${l}</button>`).join('')}</nav>`;
+function go(v){ st.view=v; save(); render(); scrollTo(0,0); }
+const prsToday=()=>EFC.all().filter(e=>e.hist&&e.repLabel!=='SEC').filter(e=>{const b=EFC.bestToday(st.logs,e);return b&&b.w>EFC.prevBest(e)});
+const anyLogged=()=>EFC.all().some(e=>EFC.doneCount(st.logs,e)>0);
+function home(){
+  const vol=EFC.volToday(st.logs), months=EFC.monthVol.map(x=>({...x})); months[5].v+=vol; const mx=Math.max(...months.map(x=>x.v));
+  const pct=Math.round((months[5].v/months[4].v-1)*100); const prs=prsToday();
+  const classes=EFC.octClasses.length+(anyLogged()?1:0), prCount=2+prs.length;
+  return `<div class="screen"><div class="pad"><div class="hello">${EFC.member.name} · Member since ${EFC.member.since}</div><div class="h1">${pct>0?'Stronger than<br>last month.':'Keep stacking<br>sessions.'}</div></div>
+  <div class="kpis"><button class="kpi big" onclick="go('progress')"><div class="l">TOTAL VOLUME LIFTED · LB</div><div class="v">${EFC.fmt(months[5].v)}</div><div class="s">${pct>=0?'+':''}${pct}% vs September${vol?' · +'+EFC.fmt(vol)+' today':''}</div>
+  <div class="bars">${months.map((x,i)=>`<div class="${i===5?'on':''}"><i style="height:${Math.round(x.v/mx*64)}px"></i>${x.m}</div>`).join('')}</div></button>
+  <button class="kpi" onclick="go('progress')"><div class="l">CLASSES · OCT</div><div class="v">${classes}</div><div class="s">${classes>=13?'Best month yet':'2 more than Sep'}</div></button>
+  <button class="kpi" onclick="go('progress')"><div class="l">PRS · OCT</div><div class="v">${prCount}</div><div class="s">${prs[0]?prs[0].name.replace('Narrow Stance ','')+' '+EFC.bestToday(st.logs,prs[0]).w:'Deadlift 205 x 8'}</div></button></div>
+  <button class="strip" onclick="go('workout')"><div><div class="d">Today · ${EFC.day.title[0]+EFC.day.title.slice(1).toLowerCase()}</div><div class="s">Racks: Deadlift · Floor: Goblet Squat, Lunges</div></div><div class="b">${anyLogged()?'RESUME':'START'}</div></button>
+  <div class="strip" style="border-style:dashed"><div><div class="d">Up next · Fri Oct 30</div><div class="s">Endure 60 · Upper Pull · Pull Up, Cross Body Lat Pull</div></div></div>
+  <div class="sample">PROTOTYPE · SAMPLE DATA · NOTHING IS SAVED TO A SERVER</div></div>${nav('home')}`;
+}
+function workout(){
+  const side=EFC.sides[st.side], D=EFC.day;
+  return `<div class="screen"><div class="whead"><div><div class="hello">${D.date} · ${D.program} · Week ${D.week} ${D.phase}</div><div class="h1">${D.title[0]+D.title.slice(1).toLowerCase()}</div></div></div>
+  <div class="seg">${['RACKS','FLOOR'].map(s=>`<button class="${st.side===s?'on':''}" onclick="st.side='${s}';save();render()">${s}<small>${s===EFC.firstSide?'You start here':'After the swap'} · rest ${EFC.sides[s].rest}</small></button>`).join('')}</div>
+  ${side.ex.map(e=>{const d=EFC.doneCount(st.logs,e); const b=EFC.bestToday(st.logs,e); return `<button class="ex" onclick="openSheet('${e.id}')"><div class="b">${e.blk}</div><div style="flex:1;min-width:0"><div class="n">${e.name}</div><div class="d">${e.rx}${b&&e.unit==='lb'?' · best '+b.w+' x '+b.r:''}</div><div class="dots">${Array.from({length:Math.max(e.sets,d)},(_,i)=>`<i class="${i<d?'on':''}"></i>`).join('')}</div></div><div class="go ${d>=e.sets?'done':d?'part':''}">${d>=e.sets?'✓':d?d+'/'+e.sets:'+'}</div></button>`}).join('')}
+  <div class="sample">TAP AN EXERCISE TO LOG IT</div></div>${nav('workout')}`;
+}
+function openSheet(id){ const ex=EFC.byId(id); st.logs[id]=EFC.setsFor(st.logs,ex); const i=st.logs[id].findIndex(s=>!s.done); sh={id,cur:i<0?st.logs[id].length-1:i,field:ex.unit==='lb'?'w':'r',fresh:true}; save(); drawSheet(); $('#sheet').classList.add('show'); $('#scrim').classList.add('show'); }
+function closeSheet(){ $('#sheet').classList.remove('show'); $('#scrim').classList.remove('show'); sh=null; render(); }
+function drawSheet(){
+  const ex=EFC.byId(sh.id), sets=st.logs[ex.id], s=sets[sh.cur], lb=ex.unit==='lb', rl=ex.repLabel||'REPS';
+  const trend = ex.hist ? `<div class="spark"><div class="t">Last ${ex.hist.length} sessions<br><b style="color:var(--c)">${ex.hist[0]} → ${ex.last.w} lb</b>${ex.perHand?' per hand':''}</div>${EFC.spark(ex.hist,150,40)}</div>` : `<div class="spark"><div class="t">${ex.unit==='band'?'Band':'Bodyweight'} move · log ${rl.toLowerCase()} only<br><b style="color:var(--c)">${ex.cue}</b></div></div>`;
+  $('#sheet').innerHTML=`<div class="grab" onclick="closeSheet()"></div>
+  <div style="display:flex;justify-content:space-between;gap:10px"><div><div class="n">${ex.name}</div><div class="s">${ex.side==='RACKS'?'Racks':'Floor'} · ${ex.blk} · ${ex.rx}${ex.range?' · '+ex.range:''}</div></div><button class="back" onclick="closeSheet()" style="align-self:flex-start">Done</button></div>
+  ${trend}
+  <div class="inputs">${lb?`<button class="${sh.field==='w'?'on':''}" onclick="sh.field='w';sh.fresh=true;drawSheet()"><div class="l">${ex.perHand?'DB · LB':'LB'}</div><div class="v" id="fw">${s.w}</div></button>`:''}
+  <button class="${sh.field==='r'?'on':''}" onclick="sh.field='r';sh.fresh=true;drawSheet()"><div class="l">${rl}</div><div class="v" id="fr">${s.r}</div></button>
+  <button><div class="l">SET</div><div class="v">${sh.cur+1}/${sets.length}</div></button></div>
+  <div class="quick">${ex.last?`<button onclick="setVal('w',${ex.last.w})">Same as last</button><button onclick="bump('w',5)">+5 lb</button>`:''}<button onclick="setVal('r',${ex.reps})">${ex.reps} ${rl==='SEC'?'sec':'reps'}</button></div>
+  <div class="kp">${[1,2,3,4,5,6,7,8,9,'.',0,'⌫'].map(k=>`<button onclick="key('${k}')">${k}</button>`).join('')}</div>
+  <div class="setrow">${sets.map((x,i)=>`<button class="${x.done?'done':''} ${i===sh.cur?'cur':''}" onclick="sh.cur=${i};sh.fresh=true;drawSheet()">S${i+1} ${lb?x.w+'x':''}${x.r}${x.done?' ✓':''}</button>`).join('')}<button onclick="addSet()">+ SET</button></div>
+  <button class="btn gold" style="margin-top:12px" onclick="saveSet()">${sets.every(x=>x.done)?'ALL SETS LOGGED · CLOSE':(s.done?'UPDATE SET ':'SAVE SET ')+(sh.cur+1)}</button>`;
+}
+function bump(k,d){ const s=st.logs[sh.id][sh.cur]; setVal(k,s[k]+d); }
+function setVal(k,v){ const s=st.logs[sh.id][sh.cur]; s[k]=v; sh.field=k; sh.fresh=true; save(); drawSheet(); }
+function key(k){ const s=st.logs[sh.id][sh.cur], f=sh.field; let cur=sh.fresh?'':String(s[f]); sh.fresh=false;
+  if(k==='⌫') cur=cur.slice(0,-1); else if(k==='.'){ if(f==='w'&&!cur.includes('.')) cur+= cur?'.':'0.'; } else cur+=k;
+  if(cur.length>5) return; s[f]= cur===''||cur==='0.'?0:parseFloat(cur); save(); const el=$(f==='w'?'#fw':'#fr'); if(el) el.textContent=cur||'0'; }
+function addSet(){ const sets=st.logs[sh.id], l=sets[sets.length-1]; sets.push({w:l.w,r:l.r,done:false}); sh.cur=sets.length-1; save(); drawSheet(); }
+function saveSet(){ const ex=EFC.byId(sh.id), sets=st.logs[ex.id];
+  if(sets.every(x=>x.done)) return closeSheet();
+  const s=sets[sh.cur]; s.done=true; for(let j=sh.cur+1;j<sets.length;j++) if(!sets[j].done) sets[j].w=s.w;
+  if(ex.hist && ex.repLabel!=='SEC' && s.w>EFC.prevBest(ex)) toast('New PR · '+ex.name+' '+s.w+' lb'); else toast('Set '+(sh.cur+1)+' saved');
+  const i=sets.findIndex(x=>!x.done); if(i>=0) sh.cur=i; sh.fresh=true; save(); drawSheet(); render(); }
+function progress(){
+  const logged=anyLogged(), prs=prsToday();
+  let cal='<div class="cal">'+'SMTWTFS'.split('').map(d=>`<span class="h">${d}</span>`).join('');
+  for(let i=0;i<4;i++) cal+='<span style="background:none"></span>';
+  for(let d=1;d<=31;d++){ let c=''; if(EFC.octClasses.includes(d)) c='d'; if(EFC.octPR.includes(d)) c='p'; if(d===29){ c= prs.length?'p':logged?'d':''; c+=' t'; } cal+=`<span class="${c}">${d}</span>`; }
+  cal+='</div>';
+  const lifts=EFC.all().filter(e=>e.hist&&e.repLabel!=='SEC'); const sel=EFC.byId(st.lift), ser=EFC.series(st.logs,sel);
+  const classes=EFC.octClasses.length+(logged?1:0);
+  return `<div class="screen"><div class="pad"><div class="hello">October 2026</div><div class="h1">${classes} classes · ${2+prs.length} PRs</div></div>${cal}
+  <div class="legend"><span><b style="background:#3a3226"></b>CLASS</span><span><b style="background:#D3B182"></b>PR DAY</span><span><b style="outline:1.5px solid #F5F2EC"></b>TODAY</span></div>
+  <div class="lifts">${lifts.map(e=>{const s=EFC.series(st.logs,e); const now=s.v[s.v.length-1]; const b=EFC.bestToday(st.logs,e); return `<button class="lf" onclick="st.lift='${e.id}';save();render()"><div><div class="n" style="${e.id===st.lift?'color:var(--g)':''}">${e.name.replace('Narrow Stance ','')}</div><div class="sd">${e.side} · ${e.blk}</div></div>${EFC.spark(s.v)}<div class="v">${now}${b?' x '+b.r:' lb'}<small>${now-s.v[0]>=0?'+':''}${now-s.v[0]} since May</small></div></button>`}).join('')}</div>
+  <div class="detail"><div class="mono gold" style="font-size:10px;letter-spacing:.14em;margin-bottom:6px">${sel.name.toUpperCase()} · BEST SET BY SESSION</div>${EFC.chart(ser.v,ser.l,330,120)}</div>
+  </div>${nav('progress')}`;
+}
+function profile(){ return `<div class="screen"><div class="pad"><div class="hello">Profile</div><div class="h1">${EFC.member.name}</div><div class="hello" style="margin-top:8px">Member since ${EFC.member.since} · Endure Fit Club, 1494 Laurel Street, San Carlos</div></div>
+  <div style="padding:24px 22px 0"><button class="btn line" onclick="if(confirm('Clear all logged sets in this prototype?')){localStorage.removeItem('efc-proto-c');location.reload()}">RESET PROTOTYPE DATA</button></div>
+  <div style="padding:14px 22px 0"><a href="../" class="btn cream" style="text-decoration:none">BACK TO CONCEPTS</a></div>
+  <div class="sample">CONCEPT C · PROGRESS FIRST · SAMPLE DATA ONLY</div></div>${nav('profile')}`; }
+function render(){ const v=st.view; $('#app').innerHTML= v==='workout'?workout(): v==='progress'?progress(): v==='profile'?profile(): home(); }
+render();
+</script></body></html>
